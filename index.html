@@ -1,0 +1,270 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>DEX Dashboard</title>
+
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+	<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+	<script src="./assets/js/bootstrap.min.js"></script>
+
+	<script src="./assets/js/lodash.min.js"></script>
+
+	<script src="./assets/js/socket.io/socket.io.min.js"></script>
+
+	<script src="./assets/js/Chart.min.js"></script>
+
+     <!-- Bootstrap core CSS -->
+    <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./assets/css/starter.css" rel="stylesheet">
+</head>
+<body>
+<div id="graph"></div>
+<script src="bundle.js"/></script>
+
+<div class="container-fluid">
+
+	<div class="row">
+	  <div class="col-md-12">
+	  	<div class="alert alert-success" role="alert" id="alert">Dashboard is initializing...</div>
+	  </div>
+	</div>
+
+	<div class="row">
+	  <div class="col-md-6">
+	  	<canvas id="orderChart" width="400" height="200"></canvas>
+	  </div>
+	  <div class="col-md-6">
+	  	<canvas id="priceChart" width="400" height="200"></canvas>
+	  </div>
+	</div>
+
+	<div class="row">
+	  <div class="col-md-6">
+	  	<div>
+		  <h2>Ask Orders</h2> 
+		  <button type="button" class="btn btn-default pull-right" id="orderAskTableClear">Clear</button>
+		  <table class="table" id='orderAskTable'>
+		    <thead>
+		      <tr>
+		      	<th>Period</th>
+		        <th>Price</th>
+		        <th>Volume</th>
+		      </tr>
+		    </thead>
+		    <tbody class='tbody-200'>     
+		    </tbody>
+		  </table>
+		</div>
+
+		<div>
+		  <h2>Bid Orders</h2>
+		  <button type="button" class="btn btn-default pull-right" id="orderBidTableClear">Clear</button>
+		  <table class="table" id='orderBidTable'>
+		    <thead>
+		      <tr>
+		      	<th>Period</th>
+		        <th>Price</th>
+		        <th>Volume</th>
+		      </tr>
+		    </thead>
+		    <tbody class='tbody-200'>
+		    </tbody>
+		  </table>
+		</div>
+	  </div>
+
+	  <div class="col-md-6">
+	  	<div>
+		  <h2>Matching Prices</h2> 
+		  <button type="button" class="btn btn-default pull-right" id="matchingPriceTableClear">Clear</button>
+		  <table class="table" id='matchingPriceTable'>
+		    <thead>
+		      <tr>
+		      	<th>Period</th>
+		        <th>Price</th>
+		      </tr>
+		    </thead>
+		    <tbody class='tbody-matching'>     
+		    </tbody>
+		  </table>
+		</div>
+	  </div>
+	</div>
+
+	<div class="row">
+	  <div class="col-md-4">
+	  	<canvas id="reserveOrderChart" width="400" height="300"></canvas>
+	  </div>
+	  <div class="col-md-4">
+	  	<canvas id="settlementsChart" width="400" height="300"></canvas>
+	  </div>
+	  <div class="col-md-4">
+	  	<canvas id="collateralChart" width="400" height="300"></canvas>
+	  </div>
+	</div>
+
+	  <div class="col-md-4">
+		<div>
+		  <h2>Reserve Ask Orders</h2> 
+		  <button type="button" class="btn btn-default pull-right" id="reserveOrderAskTableClear">Clear</button>
+		  <table class="table" id='reserveOrderAskTable'>
+		    <thead>
+		      <tr>
+		      	<th>Period</th>
+		        <th>Price</th>
+		        <th>Volume</th>
+		      </tr>
+		    </thead>
+		    <tbody class='tbody-100'>     
+		    </tbody>
+		  </table>
+		</div>
+
+		<div>
+		  <h2>Reserve Bid Orders</h2> 
+		  <button type="button" class="btn btn-default pull-right" id="reserveOrderBidTableClear">Clear</button>
+		  <table class="table" id='reserveOrderBidTable'>
+		    <thead>
+		      <tr>
+		      	<th>Period</th>
+		        <th>Price</th>
+		        <th>Volume</th>
+		      </tr>
+		    </thead>
+		    <tbody class='tbody-100'>     
+		    </tbody>
+		  </table>
+		</div>
+
+		<div>
+		  <h2>Reserve Order Ask Prices</h2>
+		  <button type="button" class="btn btn-default pull-right" id="reserveOrderAskPriceTableClear">Clear</button>
+		  <table class="table" id='reserveOrderAskPriceTable'>
+		    <thead>
+		      <tr>
+		      	<th>Period</th>
+		        <th>Price</th>
+		      </tr>
+		    </thead>
+		    <tbody class='tbody-100'>
+		    </tbody>
+		  </table>
+		</div>
+
+	  	<div>
+		  <h2>Reserve Order Bid Prices</h2>
+		  <button type="button" class="btn btn-default pull-right" id="reserveOrderBidPriceTableClear">Clear</button>
+		  <table class="table" id='reserveOrderBidPriceTable'>
+		    <thead>
+		      <tr>
+		      	<th>Period</th>
+		        <th>Price</th>
+		      </tr>
+		    </thead>
+		    <tbody class='tbody-100'>
+		    </tbody>
+		  </table>
+		</div>
+	  </div>
+
+	  <div class="col-md-4">
+	  	<div>
+		  <h2>Settlements Consumer</h2> 
+		  <button type="button" class="btn btn-default pull-right" id="settlementsConsumerTableClear">Clear</button>
+		  <table class="table" id='settlementsConsumerTable'>
+		    <thead>
+		      <tr>
+		      	<th>Period</th>
+		      	<th>User</th>
+		        <th>Ordered Volume</th>
+		        <th>Actual Volume</th>
+		      </tr>
+		    </thead>
+		    <tbody class='tbody-330'>     
+		    </tbody>
+		  </table>
+		</div>
+
+		<div>
+		  <h2>Settlements Producer</h2> 
+		  <button type="button" class="btn btn-default pull-right" id="settlementsProducerTableClear">Clear</button>
+		  <table class="table" id='settlementsProducerTable'>
+		    <thead>
+		      <tr>
+		      	<th>Period</th>
+		      	<th>User</th>
+		        <th>Ordered Volume</th>
+		        <th>Actual Volume</th>
+		      </tr>
+		    </thead>
+		    <tbody class='tbody-330'>     
+		    </tbody>
+		  </table>
+		</div>
+	  </div>
+
+	  <div class="col-md-4">
+	  	<div>
+		  <h2>Collaterals Consumer</h2> 
+		  <button type="button" class="btn btn-default pull-right" id="collateralConsumerTableClear">Clear</button>
+		  <table class="table" id='collateralConsumerTable'>
+		    <thead>
+		      <tr>
+		      	<th>Period</th>
+		      	<th>User</th>
+		        <th>Previuos Colateral</th>
+		        <th>Current Colateral</th>
+		      </tr>
+		    </thead>
+		    <tbody class='tbody-330'>     
+		    </tbody>
+		  </table>
+	  	</div>
+
+	  	<div>
+		  <h2>Collaterals Producer</h2> 
+		  <button type="button" class="btn btn-default pull-right" id="collateralProducerTableClear">Clear</button>
+		  <table class="table" id='collateralProducerTable'>
+		    <thead>
+		      <tr>
+		      	<th>Period</th>
+		      	<th>User</th>
+		        <th>Previuos Colateral</th>
+		        <th>Current Colateral</th>
+		      </tr>
+		    </thead>
+		    <tbody class='tbody-330'>     
+		    </tbody>
+		  </table>
+		</div>
+	  </div>
+	</div>
+
+	<div class="row">
+	  <div class="col-md-12">
+	  	<div>
+		  <h2>Blockchain Events</h2>
+		  <button type="button" class="btn btn-default pull-right" id="loggingTableClear">Clear</button>
+			  <table class="table" id='loggingTable'>
+			    <thead>
+			      <tr>
+			      	<th>Period</th>
+			        <th>Event</th>
+			        <th>Data</th>
+			      </tr>
+			    </thead>
+			    <tbody class='tbody-400'>
+			    </tbody>
+			  </table>
+			 </div>
+	  </div>
+	</div>
+</div>
+
+</body>
+</html>
