@@ -42,3 +42,12 @@ thead, tbody tr {
 .row {
   margin: 20px;
 }
+
+.margin-top {
+  margin-top: 100px;
+}
+
+#alert {
+  position: fixed;
+  z-index: 1000;
+}

@@ -876,67 +876,67 @@ function addLoggingEvent(period, eventName, data) {
 
 function addOrderBidTable(period, price, volume) {
 	if (!_.isUndefined(period) && !_.isUndefined(price) && !_.isUndefined(volume)) {
-		$('#orderBidTable tbody').prepend('<tr class="warning"><td>' + period + '</td><td>' + price + '</td><td>' + volume + '</td></tr>');
+		$('<tr><td>' + period + '</td><td>' + price + '</td><td>' + volume + '</td></tr>').prependTo('#orderBidTable tbody').effect('highlight', {color: '#ffffcc'}, 2000);
 	}
 }
 
 function addOrderAskTable(period, price, volume) {
 	if (!_.isUndefined(period) && !_.isUndefined(price) && !_.isUndefined(volume)) {
-		$('#orderAskTable tbody').prepend('<tr class="warning"><td>' + period + '</td><td>' + price + '</td><td>' + volume + '</td></tr>');
+        $('<tr><td>' + period + '</td><td>' + price + '</td><td>' + volume + '</td></tr>').prependTo('#orderAskTable tbody').effect('highlight', {color: '#ffffcc'}, 2000);
 	}
 }
 
 function addReserveOrderBidTable(period, price, volume) {
 	if (!_.isUndefined(period) && !_.isUndefined(price) && !_.isUndefined(volume)) {
-		$('#reserveOrderBidTable tbody').prepend('<tr class="warning"><td>' + period + '</td><td>' + price + '</td><td>' + volume + '</td></tr>');
+        $('<tr><td>' + period + '</td><td>' + price + '</td><td>' + volume + '</td></tr>').prependTo('#reserveOrderBidTable tbody').effect('highlight', {color: '#ffffcc'}, 2000);
 	}
 }
 
 function addReserveOrderAskTable(period, price, volume) {
 	if (!_.isUndefined(period) && !_.isUndefined(price) && !_.isUndefined(volume)) {
-		$('#reserveOrderAskTable tbody').prepend('<tr class="warning"><td>' + period + '</td><td>' + price + '</td><td>' + volume + '</td></tr>');
+        $('<tr><td>' + period + '</td><td>' + price + '</td><td>' + volume + '</td></tr>').prependTo('#reserveOrderAskTable tbody').effect('highlight', {color: '#ffffcc'}, 2000);
 	}
 }
 
 function addMatchingPriceTable(period, price) {
 	if (!_.isUndefined(period) && !_.isUndefined(price)) {
-		$('#matchingPriceTable tbody').prepend('<tr class="warning"><td>' + period + '</td><td>' + price + '</td></tr>');
+        $('<tr><td>' + period + '</td><td>' + price + '</td></tr>').prependTo('#matchingPriceTable tbody').effect('highlight', {color: '#ffffcc'}, 2000);
 	}
 }
 
 function addReserveOrderAskPriceTable(period, price) {
 	if (!_.isUndefined(period) && !_.isUndefined(price)) {
-		$('#reserveOrderAskPriceTable tbody').prepend('<tr class="warning"><td>' + period + '</td><td>' + price + '</td></tr>');
+        $('<tr><td>' + period + '</td><td>' + price + '</td></tr>').prependTo('#reserveOrderAskPriceTable tbody').effect('highlight', {color: '#ffffcc'}, 2000);
 	}
 }
 
 function addReserveOrderBidPriceTable(period, price) {
 	if (!_.isUndefined(period) && !_.isUndefined(price)) {
-		$('#reserveOrderBidPriceTable tbody').prepend('<tr class="warning"><td>' + period + '</td><td>' + price + '</td></tr>');
+        $('<tr><td>' + period + '</td><td>' + price + '</td></tr>').prependTo('#reserveOrderBidPriceTable tbody').effect('highlight', {color: '#ffffcc'}, 2000);
 	}
 }
 
 function addSettlementProducerTable(period, user, orderedVolume, usedVolume) {
     if (!_.isUndefined(period) && !_.isUndefined(user) && !_.isUndefined(orderedVolume) && !_.isUndefined(usedVolume)) {
-        $('#settlementsProducerTable tbody').prepend('<tr class="warning"><td>' + period + '</td><td>' + user + '</td><td>' + orderedVolume + '</td><td>' + usedVolume + '</td></tr>');
+        $('<tr><td>' + period + '</td><td>' + user + '</td><td>' + orderedVolume + '</td><td>' + usedVolume + '</td></tr>').prependTo('#settlementsProducerTable tbody').effect('highlight', {color: '#ffffcc'}, 2000);
     } 
 }
 
 function addSettlementConsumerTable(period, user, orderedVolume, usedVolume) {
     if (!_.isUndefined(period) && !_.isUndefined(user) && !_.isUndefined(orderedVolume) && !_.isUndefined(usedVolume)) {
-        $('#settlementsConsumerTable tbody').prepend('<tr class="warning"><td>' + period + '</td><td>' + user + '</td><td>' + orderedVolume + '</td><td>' + usedVolume + '</td></tr>');
+        $('<tr><td>' + period + '</td><td>' + user + '</td><td>' + orderedVolume + '</td><td>' + usedVolume + '</td></tr>').prependTo('#settlementsConsumerTable tbody').effect('highlight', {color: '#ffffcc'}, 2000);
     } 
 }
 
 function addCollateralProducerTable(period, user, previousCollateral, actualCollateral) {
     if (!_.isUndefined(period) && !_.isUndefined(user) && !_.isUndefined(previousCollateral) && !_.isUndefined(actualCollateral)) {
-        $('#collateralProducerTable tbody').prepend('<tr class="warning"><td>' + period + '</td><td>' + user + '</td><td>' + previousCollateral + '</td><td>' + actualCollateral + '</td></tr>');
+        $('<tr><td>' + period + '</td><td>' + user + '</td><td>' + previousCollateral + '</td><td>' + actualCollateral + '</td></tr>').prependTo('#collateralProducerTable tbody').effect('highlight', {color: '#ffffcc'}, 2000);
     } 
 }
 
 function addCollateralConsumerTable(period, user, previousCollateral, actualCollateral) {
     if (!_.isUndefined(period) && !_.isUndefined(user) && !_.isUndefined(previousCollateral) && !_.isUndefined(actualCollateral)) {
-        $('#collateralConsumerTable tbody').prepend('<tr class="warning"><td>' + period + '</td><td>' + user + '</td><td>' + previousCollateral + '</td><td>' + actualCollateral + '</td></tr>');
+        $('<tr><td>' + period + '</td><td>' + user + '</td><td>' + previousCollateral + '</td><td>' + actualCollateral + '</td></tr>').prependTo('#collateralConsumerTable tbody').effect('highlight', {color: '#ffffcc'}, 2000);
     } 
 }
 
@@ -960,7 +960,7 @@ function showAlert(text) {
 	if (_.isUndefined(text)) {
 		text = '';
 	}
-	$('#alert').text(text);
+	$('#alert').text(text).effect('highlight', {color: '#ffffcc'}, 2000);
 }
 
 $(document).ready(function() { 
